@@ -7,15 +7,15 @@
  * be unreliable from outside Nicaragua, so Justia is the primary source.
  *
  * Pipeline:
- *   1. Fetch /nacionales/leyes/   (national laws)
- *   2. Fetch /nacionales/codigos/  (codes -- civil, penal, etc.)
- *   3. Fetch /nacionales/decretos/ (decree-laws)
+ *   1. Fetch /nacionales/leyes/        (national laws)
+ *   2. Fetch /nacionales/codigos/      (codes -- civil, penal, etc.)
+ *   3. Fetch /nacionales/decretos-ley/ (decree-laws)
  *   4. Deduplicate and write data/census.json
  *
  * Sources:
- *   - Primary:   https://nicaragua.justia.com/nacionales/leyes/
+ *   - Primary:    https://nicaragua.justia.com/nacionales/leyes/
  *   - Secondary:  https://nicaragua.justia.com/nacionales/codigos/
- *   - Tertiary:   https://nicaragua.justia.com/nacionales/decretos/
+ *   - Tertiary:   https://nicaragua.justia.com/nacionales/decretos-ley/
  *
  * Usage:
  *   npx tsx scripts/census.ts
@@ -190,9 +190,9 @@ async function censusFromJustia(limit: number | null): Promise<RawLawEntry[]> {
   const allEntries: RawLawEntry[] = [];
 
   const categories: Array<{ path: string; label: string; category: string }> = [
-    { path: '/nacionales/leyes/', label: 'Federal Laws', category: 'leyes' },
+    { path: '/nacionales/leyes/', label: 'National Laws', category: 'leyes' },
     { path: '/nacionales/codigos/', label: 'Codes', category: 'codigos' },
-    { path: '/nacionales/decretos/', label: 'Decree-Laws', category: 'decretos' },
+    { path: '/nacionales/decretos-ley/', label: 'Decree-Laws', category: 'decretos-ley' },
   ];
 
   for (const { path: sectionPath, label, category } of categories) {
@@ -222,7 +222,7 @@ async function main(): Promise<void> {
 
   console.log('Nicaraguan Law MCP -- Census');
   console.log('===========================\n');
-  console.log('  Primary: nicaragua.justia.com/nacionales/leyes/ (+ codigos, decretos)');
+  console.log('  Primary: nicaragua.justia.com/nacionales/leyes/ (+ codigos, decretos-ley)');
   if (limit) console.log(`  --limit ${limit}`);
   console.log('');
 
@@ -284,7 +284,7 @@ async function main(): Promise<void> {
       by_category: {
         leyes: allEntries.filter(e => e.category === 'leyes').length,
         codigos: allEntries.filter(e => e.category === 'codigos').length,
-        decretos: allEntries.filter(e => e.category === 'decretos').length,
+        'decretos-ley': allEntries.filter(e => e.category === 'decretos-ley').length,
       },
     },
     laws,
@@ -305,7 +305,7 @@ async function main(): Promise<void> {
 function mapCategory(category: string): 'act' | 'code' | 'decree' {
   switch (category) {
     case 'codigos': return 'code';
-    case 'decretos': return 'decree';
+    case 'decretos-ley': return 'decree';
     default: return 'act';
   }
 }
