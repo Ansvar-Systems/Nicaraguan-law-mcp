@@ -256,7 +256,7 @@ async function main(): Promise<void> {
       url: entry.url,
       status: 'in_force' as const,
       category: mapCategory(entry.category),
-      classification: 'ingestable' as const,
+      classification: 'ingestable' as 'ingestable' | 'inaccessible',
       ingested: false,
       provision_count: 0,
       ingestion_date: null as string | null,

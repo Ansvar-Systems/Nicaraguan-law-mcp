@@ -1,16 +1,16 @@
 {
   "$schema": "./golden-tests.schema.json",
   "version": "1.0",
-  "mcp_name": "El Salvador Law MCP",
-  "description": "Golden contract tests for the El Salvador Law MCP",
+  "mcp_name": "Nicaraguan Law MCP",
+  "description": "Golden contract tests for the Nicaraguan Law MCP",
   "tests": [
     {
-      "id": "SV-001",
+      "id": "NI-001",
       "category": "search",
-      "description": "Search for 'datos personales' returns results",
+      "description": "Search for 'penal' returns results",
       "tool": "search_legislation",
       "input": {
-        "query": "datos personales",
+        "query": "penal",
         "limit": 5
       },
       "assertions": {
@@ -20,7 +20,7 @@
       }
     },
     {
-      "id": "SV-002",
+      "id": "NI-002",
       "category": "negative",
       "description": "Negative test: non-existent law",
       "tool": "get_provision",
