@@ -1,0 +1,46 @@
+# sources.yml
+schema_version: "1.0"
+mcp_name: "Nicaraguan Law MCP"
+jurisdiction: "NI"
+
+sources:
+  - name: "Justia Nicaragua — Legislación Nicaragüense"
+    authority: "Asamblea Nacional de Nicaragua (secondary aggregator)"
+    official_portal: "https://nicaragua.justia.com"
+    canonical_identifier: "Justia Nicaragua document slug"
+    retrieval_method: "HTML_SCRAPE"
+    api_documentation: "N/A — HTML scraping of public aggregator"
+    update_frequency: "monthly"
+    last_ingested: "2026-01-01"
+    license_or_terms:
+      type: "Public Domain Aggregation"
+      url: "https://nicaragua.justia.com"
+      summary: "Justia aggregates publicly available Nicaraguan legislation; underlying legislation is in the public domain as official government texts"
+    coverage:
+      scope: "Major Nicaraguan legislation including the Constitución Política de Nicaragua (1987 as amended), Código Civil, Código Penal (Ley 641), Código de Comercio, Ley 787/2012 (Ley de Protección de Datos Personales), Ley 200/1994 (Ley General de Telecomunicaciones y Servicios Postales), and 2,700+ statutes and decrees"
+      limitations: "Justia Nicaragua focuses on major national legislation; municipal ordinances not included; some legislation may lag La Gaceta publication; unofficial aggregator — cross-reference with La Gaceta for authoritative text"
+    languages:
+      - "es"
+
+  - name: "La Gaceta — Diario Oficial de Nicaragua"
+    authority: "República de Nicaragua — Asamblea Nacional"
+    official_portal: "https://digesto.asamblea.gob.ni"
+    canonical_identifier: "Número de Ley or Decreto + year"
+    retrieval_method: "HTML_SCRAPE"
+    api_documentation: "N/A"
+    update_frequency: "daily"
+    last_ingested: "PENDING"
+    license_or_terms:
+      type: "Nicaraguan Government Public Domain"
+      url: "https://digesto.asamblea.gob.ni"
+      summary: "Official legislative digest maintained by the Asamblea Nacional; authoritative primary source for Nicaraguan legislation"
+    coverage:
+      scope: "All officially promulgated legislation and decrees; consolidated legislative index via Digesto Jurídico Nicaragüense"
+      limitations: "Digesto may not include very recent amendments immediately; some pre-digital laws available in PDF only"
+    languages:
+      - "es"
+
+data_freshness:
+  automated_checks: true
+  check_frequency: "weekly"
+  last_verified: "2026-01-01"
