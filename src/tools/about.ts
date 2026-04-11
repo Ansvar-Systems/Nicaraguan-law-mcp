@@ -34,6 +34,9 @@ export function getAbout(db: InstanceType<typeof Database>, context: AboutContex
     stats.eu_references = euRefs;
   }
 
+  const disclaimer =
+    'This is a research tool, not legal advice. Verify critical citations against official sources.';
+
   return {
     name: 'Nicaragua Law MCP',
     version: context.version,
@@ -50,12 +53,16 @@ export function getAbout(db: InstanceType<typeof Database>, context: AboutContex
     freshness: {
       database_built: context.dbBuilt,
     },
-    disclaimer:
-      'This is a research tool, not legal advice. Verify critical citations against official sources.',
+    disclaimer,
     network: {
       name: 'Ansvar MCP Network',
       open_law: 'https://ansvar.eu/open-law',
       directory: 'https://ansvar.ai/mcp',
+    },
+    _meta: {
+      disclaimer,
+      data_age: context.dbBuilt.split('T')[0],
+      copyright: 'Asamblea Nacional de Nicaragua',
     },
   };
 }

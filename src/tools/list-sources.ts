@@ -44,15 +44,13 @@ export async function listSources(
     results: {
       sources: [
         {
-          name: 'Dominican Republic Law',
-          authority: 'National Council for Law Reporting (Dominican Republic Law)',
-          url: 'http://consultoria.gov.do',
-          license: 'Government Open Data',
+          name: 'Justia Nicaragua',
+          authority: 'Asamblea Nacional de Nicaragua',
+          url: 'https://nicaragua.justia.com',
+          license: 'Government Public Domain',
           coverage:
-            'All Acts of Parliament (revised edition), subsidiary legislation, ' +
-            'the Constitution of Dominican Republic (2010), Dominican Republic Gazette notices, and selected case law ' +
-            'from superior courts including the Supreme Court, Court of Appeal, and High Court',
-          languages: ['en', 'sw'],
+            'Nicaraguan statutes via nicaragua.justia.com aggregator — 1730 laws as of 2026-03-01',
+          languages: ['es'],
         },
       ],
       database: {
@@ -63,6 +61,6 @@ export async function listSources(
         provision_count: safeCount(db, 'SELECT COUNT(*) as count FROM legal_provisions'),
       },
     },
-    _metadata: generateResponseMetadata(db),
+    _meta: generateResponseMetadata(db),
   };
 }
