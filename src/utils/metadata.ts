@@ -8,26 +8,28 @@ export interface ResponseMetadata {
   data_source: string;
   jurisdiction: string;
   disclaimer: string;
-  freshness?: string;
+  data_age?: string;
+  copyright?: string;
   note?: string;
   query_strategy?: string;
+  _error_type?: string;
 }
 
 export interface ToolResponse<T> {
   results: T;
-  _metadata: ResponseMetadata;
+  _meta: ResponseMetadata;
   _citation?: import('./citation.js').CitationMetadata;
 }
 
 export function generateResponseMetadata(
   db: InstanceType<typeof Database>,
 ): ResponseMetadata {
-  let freshness: string | undefined;
+  let data_age: string | undefined;
   try {
     const row = db.prepare(
       "SELECT value FROM db_metadata WHERE key = 'built_at'"
     ).get() as { value: string } | undefined;
-    if (row) freshness = row.value;
+    if (row) data_age = row.value;
   } catch {
     // Ignore
   }
@@ -39,6 +41,7 @@ export function generateResponseMetadata(
       'This data is sourced from the Asamblea Nacional de Nicaragua legislative portal. ' +
       'The authoritative versions are in Spanish. ' +
       'Always verify with the official legislative portal (legislacion.asamblea.gob.ni).',
-    freshness,
+    data_age,
+    copyright: 'Asamblea Nacional de Nicaragua',
   };
 }
